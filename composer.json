@@ -1,7 +1,7 @@
 {
   "name": "br33f/php-ga4-mp",
   "description": "PHP GoogleAnalytics4 Measurement Protocol Library",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "license": "MIT",
   "authors": [
     {

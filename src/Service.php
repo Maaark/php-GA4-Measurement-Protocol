@@ -71,6 +71,9 @@ class Service
      * @var string
      */
     protected $ipOverride;
+    protected $dr;
+    protected $ua;
+    protected $gclid;
 
     /**
      * Http Options
@@ -240,9 +243,57 @@ class Service
             // https://github.com/dataunlocker/save-analytics-from-content-blockers/issues/25#issuecomment-864392422
             $parameters['_uip'] = $ip;
         }
+        
+        $ua = $this->getUAOverride();
+        
+        if (!empty($ua)) {
+            $parameters['ua'] = $ua;
+            $parameters['_ua'] = $ua;
+        }
+        
+        $dr = $this->getDROverride();
+        
+        if (!empty($dr)) {
+            $parameters['dr'] = $dr;
+            $parameters['_dr'] = $dr;
+        }
+        
+        $gclid = $this->getGclid();
+        
+        if (!empty($gclid)) {
+            $parameters['gclid'] = $gclid;
+            $parameters['_gclid'] = $gclid;
+        }
+        
 
         return array_filter($parameters);
     }
+    
+    /**
+     * @return string
+     */
+    public function getUAOverride(): ?string
+    {
+        return $this->ua;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDROverride(): ?string
+    {
+        return $this->dr;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getGclid(): ?string
+    {
+        return $this->gclid;
+    }
+    
+    
 
     /**
      * @return string
@@ -310,6 +361,30 @@ class Service
     public function setIpOverride(string $ipOverride)
     {
         $this->ipOverride = $ipOverride;
+    }
+    
+     /**
+     * @param string $gclid
+     */
+    public function setGclidOverride(string $gclid)
+    {
+        $this->gclid = $gclid;
+    }
+
+	/**
+     * @param string $ua
+     */
+    public function setUAOverride(string $ua)
+    {
+        $this->ua = $ua;
+    }
+    
+     /**
+     * @param string $dr
+     */
+    public function setDROverride(string $dr)
+    {
+        $this->dr = $dr;
     }
 
     /**

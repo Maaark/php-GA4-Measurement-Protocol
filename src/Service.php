@@ -276,7 +276,7 @@ class Service
         
         $gsnum = $this->getGsnum();
         
-        if (!empty($gclid)) {
+        if (!empty($gsnum)) {
             $parameters['sct'] = $gsnum;
         }
         
@@ -415,7 +415,7 @@ class Service
      /**
      * @param string gsid
      */
-    public function setGsnum(string $gsid)
+    public function setGsid(string $gsid)
     {
         $this->gsid = $gsid;
     }

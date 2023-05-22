@@ -395,15 +395,7 @@ class Service
     {
         $this->ipOverride = $ipOverride;
     }
-    
-     /**
-     * @param string $gclid
-     */
-    public function setGclidOverride(string $gclid)
-    {
-        $this->gclid = $gclid;
-    }
-    
+   
      /**
      * @param string $gclid
      */

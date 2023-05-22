@@ -74,6 +74,8 @@ class Service
     protected $dr;
     protected $ua;
     protected $gclid;
+    protected $gsid;
+    protected $gsnum;
 
     /**
      * Http Options
@@ -265,6 +267,21 @@ class Service
             $parameters['_gclid'] = $gclid;
         }
         
+        
+        $gsid = $this->getGsid();
+        
+        if (!empty($gsid)) {
+            $parameters['sid'] = $gsid;
+        }
+        
+        $gsnum = $this->getGsnum();
+        
+        if (!empty($gclid)) {
+            $parameters['sct'] = $gsnum;
+        }
+        
+        
+        
 
         return array_filter($parameters);
     }
@@ -284,6 +301,22 @@ class Service
     {
         return $this->dr;
     }
+    
+    /**
+     * @return string
+     */
+    public function getGsid(): ?string
+    {
+        return $this->gsid;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getGsnum(): ?string
+    {
+        return $this->gsnum;
+    } 
     
     /**
      * @return string
@@ -361,6 +394,30 @@ class Service
     public function setIpOverride(string $ipOverride)
     {
         $this->ipOverride = $ipOverride;
+    }
+    
+     /**
+     * @param string $gclid
+     */
+    public function setGclidOverride(string $gclid)
+    {
+        $this->gclid = $gclid;
+    }
+    
+     /**
+     * @param string $gclid
+     */
+    public function setGsnum(string $gsnum)
+    {
+        $this->gsnum = $gsnum;
+    }
+    
+     /**
+     * @param string gsid
+     */
+    public function setGsnum(string $gsid)
+    {
+        $this->gsid = $gsid;
     }
     
      /**

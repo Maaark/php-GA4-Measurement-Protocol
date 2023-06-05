@@ -124,8 +124,13 @@ class BaseRequest extends AbstractRequest
      * @param AbstractEvent $event
      * @return BaseRequest
      */
-    public function addEvent(AbstractEvent $event)
+    public function addEvent(AbstractEvent $event, $session_id = '')
     {
+        if(!empty($session_id))
+        {
+            $event->setParamValue('session_id', $session_id);
+        }
+
         $this->getEvents()->addEvent($event);
         return $this;
     }

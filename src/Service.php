@@ -65,7 +65,7 @@ class Service
      * @var string
      */
     protected $firebaseId = null;
-    
+
     /**
      * The custom ip address of the visitor
      * @var string
@@ -113,7 +113,7 @@ class Service
             ? new BaseResponse($response)
             : new DebugResponse($response);
     }
-    
+
     /**
      * @param AbstractRequest $request
      * @return BaseResponse
@@ -232,7 +232,7 @@ class Service
             'measurement_id' => $this->getMeasurementId(),
             'firebase_app_id' => $this->getFirebaseId(),
         ];
-        
+
         if ($parameters['firebase_app_id'] && $parameters['measurement_id']) {
             throw new MisconfigurationException("Cannot specify both 'measurement_id' and 'firebase_app_id'.");
         }
@@ -245,47 +245,47 @@ class Service
             // https://github.com/dataunlocker/save-analytics-from-content-blockers/issues/25#issuecomment-864392422
             $parameters['_uip'] = $ip;
         }
-        
+
         $ua = $this->getUAOverride();
-        
+
         if (!empty($ua)) {
             $parameters['ua'] = $ua;
             $parameters['_ua'] = $ua;
         }
-        
+
         $dr = $this->getDROverride();
-        
+
         if (!empty($dr)) {
             $parameters['dr'] = $dr;
             $parameters['_dr'] = $dr;
         }
-        
+
         $gclid = $this->getGclid();
-        
+
         if (!empty($gclid)) {
             $parameters['gclid'] = $gclid;
             $parameters['_gclid'] = $gclid;
         }
-        
-        
+
+
         $gsid = $this->getGsid();
-        
+
         if (!empty($gsid)) {
             $parameters['sid'] = $gsid;
         }
-        
+
         $gsnum = $this->getGsnum();
-        
+
         if (!empty($gsnum)) {
             $parameters['sct'] = $gsnum;
         }
-        
-        
-        
+
+
+
 
         return array_filter($parameters);
     }
-    
+
     /**
      * @return string
      */
@@ -293,7 +293,7 @@ class Service
     {
         return $this->ua;
     }
-    
+
     /**
      * @return string
      */
@@ -301,7 +301,7 @@ class Service
     {
         return $this->dr;
     }
-    
+
     /**
      * @return string
      */
@@ -309,15 +309,15 @@ class Service
     {
         return $this->gsid;
     }
-    
+
     /**
      * @return string
      */
     public function getGsnum(): ?string
     {
         return $this->gsnum;
-    } 
-    
+    }
+
     /**
      * @return string
      */
@@ -325,8 +325,8 @@ class Service
     {
         return $this->gclid;
     }
-    
-    
+
+
 
     /**
      * @return string
@@ -395,7 +395,7 @@ class Service
     {
         $this->ipOverride = $ipOverride;
     }
-   
+
      /**
      * @param string $gclid
      */
@@ -403,7 +403,7 @@ class Service
     {
         $this->gsnum = $gsnum;
     }
-    
+
      /**
      * @param string gsid
      */
@@ -411,7 +411,7 @@ class Service
     {
         $this->gsid = $gsid;
     }
-    
+
      /**
      * @param string $gclid
      */
@@ -427,7 +427,7 @@ class Service
     {
         $this->ua = $ua;
     }
-    
+
      /**
      * @param string $dr
      */
@@ -441,6 +441,14 @@ class Service
      */
     public function getOptions(): ?array
     {
+
+        $ua = $this->getUAOverride();
+
+        if(!empty($ua))
+        {
+            $this->options['headers']['User-Agent'] = $ua;
+        }
+
         return $this->options;
     }
 
@@ -451,5 +459,5 @@ class Service
     {
         $this->options = $options;
     }
-    
+
 }

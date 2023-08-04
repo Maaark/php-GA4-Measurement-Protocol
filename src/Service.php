@@ -77,6 +77,8 @@ class Service
     protected $gsid;
     protected $gsnum;
 
+    protected $additionalParameters;
+
     /**
      * Http Options
      * @var array
@@ -280,10 +282,24 @@ class Service
             $parameters['sct'] = $gsnum;
         }
 
+        $additionalParameters = $this->getAdditionalParameters();
 
-
+        foreach($additionalParameters as $paramKey => $paramValue)
+        {
+            $parameters[$paramKey] = $paramValue;
+        }
 
         return array_filter($parameters);
+    }
+
+    public function setAdditionalParameters($array)
+    {
+        $this->additionalParameters = $array;
+    }
+
+    public function getAdditionalParameters()
+    {
+        return $this->additionalParameters;
     }
 
     /**
